@@ -1,28 +1,3 @@
-# @title Generate | Output generated inside "AICoverGen\song_output\random_number"
-# @markdown Main Option | You also can input audio path inside "SONG_INPUT"
-SONG_INPUT = input("Enter Youtube URL: ") # @param {type:"string"}
-RVC_DIRNAME = "Daemi" # @param {type:"string"}
-PITCH_CHANGE = 0 # @param {type:"integer"}
-PITCH_CHANGE_ALL = 0 # @param {type:"integer"}
-# @markdown Voice Conversion Options
-INDEX_RATE = 0.2 # @param {type:"number"}
-FILTER_RADIUS = 3 # @param {type:"integer"}
-PITCH_DETECTION_ALGO = "rmvpe" # @param ["rmvpe", "mangio-crepe"]
-CREPE_HOP_LENGTH = 128 # @param {type:"integer"}
-PROTECT = 0.33 # @param {type:"number"}
-REMIX_MIX_RATE = 0.25  # @param {type:"number"}
-# @markdown Audio Mixing Options
-MAIN_VOL = 0 # @param {type:"integer"}
-BACKUP_VOL = 0 # @param {type:"integer"}
-INST_VOL = 0 # @param {type:"integer"}
-# @markdown Reverb Control
-REVERB_SIZE = 0.15 # @param {type:"number"}
-REVERB_WETNESS = 0.2 # @param {type:"number"}
-REVERB_DRYNESS = 0.8 # @param {type:"number"}
-REVERB_DAMPING = 0.7 # @param {type:"number"}
-# @markdown Output Format
-OUTPUT_FORMAT = "wav" # @param ["mp3", "wav"]
-
 import subprocess
 
 command = [
