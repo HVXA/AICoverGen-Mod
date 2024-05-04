@@ -188,7 +188,7 @@ if __name__ == '__main__':
                 with gr.Row():
                     with gr.Column():
                         rvc_model = gr.Dropdown(voice_models, label='Voice Models', info='Models folder "AICoverGen --> rvc_models". After new models are added into this folder, click the refresh button')
-                        ref_btn = gr.Button('Refresh Models 🔁', variant='primary')
+                        ref_btn = gr.Button('Refresh Models ', variant='primary')
 
                     with gr.Column() as yt_link_col:
                         song_input = gr.Text(label='Song input', info='Link to a song on YouTube or full path to a local file. For file upload, click the button below.')
@@ -196,7 +196,7 @@ if __name__ == '__main__':
 
                     with gr.Column(visible=False) as file_upload_col:
                         local_file = gr.File(label='Audio file')
-                        song_input_file = gr.UploadButton('Upload 📂', file_types=['audio'], variant='primary')
+                        song_input_file = gr.UploadButton('Upload', file_types=['audio'], variant='primary')
                         show_yt_link_button = gr.Button('Paste YouTube link/Path to local file instead')
                         song_input_file.upload(process_file_upload, inputs=[song_input_file], outputs=[local_file, song_input])
 
@@ -213,7 +213,7 @@ if __name__ == '__main__':
                     rms_mix_rate = gr.Slider(0, 1, value=0.25, label='RMS mix rate', info="Control how much to mimic the original vocal's loudness (0) or a fixed loudness (1)")
                     protect = gr.Slider(0, 0.5, value=0.33, label='Protect rate', info='Protect voiceless consonants and breath sounds. Set to 0.5 to disable.')
                     with gr.Column():
-                        f0_method = gr.Dropdown(['rmvpe', 'mangio-crepe'], value='rmvpe', label='Pitch detection algorithm', info='Best option is rmvpe (clarity in vocals), then mangio-crepe (smoother vocals)')
+                        f0_method = gr.Dropdown(['rmvpe', 'dio', 'mangio-crepe'], value='rmvpe', label='Pitch detection algorithm', info='Best option is rmvpe (clarity in vocals), then mangio-crepe (smoother vocals)')
                         crepe_hop_length = gr.Slider(32, 320, value=128, step=1, visible=False, label='Crepe hop length', info='Lower values leads to longer conversions and higher risk of voice cracks, but better pitch accuracy.')
                         f0_method.change(show_hop_slider, inputs=f0_method, outputs=crepe_hop_length)
                 keep_files = gr.Checkbox(label='Keep intermediate files', info='Keep all audio files generated in the song_output/id directory, e.g. Isolated Vocals/Instrumentals. Leave unchecked to save space')
@@ -240,7 +240,8 @@ if __name__ == '__main__':
                 generate_btn = gr.Button("Generate", variant='primary')
             with gr.Row():
                 ai_cover = gr.Audio(label='AI Cover (Vocal Only Inference)', show_share_button=False)
-                ai_backing = gr.Audio(label='AI Cover (Vocal Backing Inference)', show_share_button=False)
+                 with gr.Row():
+                     ai_backing = gr.Audio(label='AI Cover (Vocal Backing Inference)', show_share_button=False)
 
             ref_btn.click(update_models_list, None, outputs=rvc_model)
             is_webui = gr.Number(value=1, visible=False)
